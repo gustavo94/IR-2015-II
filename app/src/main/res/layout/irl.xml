@@ -16,10 +16,15 @@
         android:layout_height="wrap_content"
         android:text="@string/titulo"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="#4689C8"
+        android:textColor="#128a8d"
         android:textStyle="bold"
         android:gravity="center"
-        android:layout_margin="16dp"/>
+        android:layout_margin="5dp"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"></TableRow>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -36,30 +41,41 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/album_description_view"
+                android:id="@+id/txtDirec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Direccion ip..."
-                android:inputType="textMultiLine"
                 android:layout_marginLeft="48dp"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="16dp" />
 
-            <Button
-                android:id="@+id/next_button"
+            <ToggleButton
+                android:id="@+id/btnConectar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/bconectar"
-                android:layout_margin="16dp"/>
+                android:layout_margin="16dp"
+                android:textOff="Conectar"
+                android:textOn="Desconectar" />
 
 
         </LinearLayout>
 
+            <TextView
+                android:id="@+id/estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="En espera..."
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_margin="8dp" />
+
             <SeekBar
-                android:id="@+id/seek_bar"
+                android:id="@+id/sbmu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="90"
-                android:progress="45"
+                android:max="180"
+                android:progress="0"
                 android:layout_marginTop="16dp"/>
 
             <LinearLayout
@@ -72,7 +88,7 @@
                     android:id="@+id/seektext1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Label1:"
+                    android:text="Muñeca"
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#4689C8"
                     android:textStyle="bold"
@@ -85,7 +101,7 @@
                 android:id="@+id/seektext11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="text1"
+                android:text="Grados: 0°"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:textColor="#4689C8"
                 android:textStyle="bold"
@@ -96,11 +112,11 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/seek_bar2"
+                android:id="@+id/sbma"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="90"
-                android:progress="45"
+                android:max="180"
+                android:progress="0"
                 android:layout_marginTop="16dp"/>
 
             <LinearLayout
@@ -113,7 +129,7 @@
                     android:id="@+id/seektext2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Label2:"
+                    android:text="Mano"
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#4689C8"
                     android:textStyle="bold"
@@ -121,10 +137,10 @@
                     />
 
             <TextView
-                android:id="@+id/seektext2"
+                android:id="@+id/seektext22"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="text2"
+                android:text="Grados: 0°"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:textColor="#4689C8"
                 android:textStyle="bold"
@@ -134,11 +150,11 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/seek_bar3"
+                android:id="@+id/sbbr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="90"
-                android:progress="45"
+                android:max="180"
+                android:progress="0"
                 android:layout_marginTop="16dp"/>
 
             <LinearLayout
@@ -151,7 +167,7 @@
                     android:id="@+id/seektext3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Label3:"
+                    android:text="Brazo"
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#4689C8"
                     android:textStyle="bold"
@@ -159,10 +175,10 @@
                     />
 
             <TextView
-                android:id="@+id/seektext3"
+                android:id="@+id/seektext33"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="text3"
+                android:text="Grados: 0°"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:textColor="#4689C8"
                 android:textStyle="bold"
@@ -172,11 +188,11 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/seek_bar4"
+                android:id="@+id/sbco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="90"
-                android:progress="45"
+                android:max="180"
+                android:progress="0"
                 android:layout_marginTop="16dp"/>
 
             <LinearLayout
@@ -189,7 +205,7 @@
                     android:id="@+id/seektext4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Label4:"
+                    android:text="Codo"
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#4689C8"
                     android:textStyle="bold"
@@ -197,10 +213,10 @@
                 />
 
             <TextView
-                android:id="@+id/seektext4"
+                android:id="@+id/seektext44"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="text4"
+                android:text="Grados: 0°"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:textColor="#4689C8"
                 android:textStyle="bold"
@@ -210,11 +226,11 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/seek_bar5"
+                android:id="@+id/sbho"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="90"
-                android:progress="45"
+                android:max="180"
+                android:progress="0"
                 android:layout_marginTop="16dp"/>
 
             <LinearLayout
@@ -227,7 +243,7 @@
                     android:id="@+id/seektext5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Label5:"
+                    android:text="Hombro"
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#4689C8"
                     android:textStyle="bold"
@@ -235,10 +251,10 @@
                     />
 
             <TextView
-                android:id="@+id/seektext5"
+                android:id="@+id/seektext55"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="text5"
+                android:text="Grados: 0°"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:textColor="#4689C8"
                 android:textStyle="bold"
