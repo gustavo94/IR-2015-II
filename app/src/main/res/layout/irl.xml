@@ -22,10 +22,34 @@
         android:layout_margin="8dp"
         android:textSize="24sp"/>
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"></TableRow>
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/txtDirec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Direccion ip..."
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="16dp"
+            android:inputType="text"/>
+
+        <ToggleButton
+            android:id="@+id/btnConectar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bconectar"
+            android:layout_margin="16dp"
+            android:textOff="Conectar"
+            android:textOn="Desconectar"
+            android:textColor="#011826"/>
+
+
+    </LinearLayout>
+
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -36,32 +60,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/txtDirec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Direccion ip..."
-                android:layout_marginLeft="48dp"
-                android:layout_marginTop="16dp"
-                android:inputType="text"/>
-
-            <ToggleButton
-                android:id="@+id/btnConectar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bconectar"
-                android:layout_margin="16dp"
-                android:textOff="Conectar"
-                android:textOn="Desconectar"
-                android:textColor="#011826"/>
-
-
-        </LinearLayout>
 
             <TextView
                 android:id="@+id/estado"
@@ -80,6 +79,8 @@
                 android:max="180"
                 android:progress="0"
                 android:layout_marginTop="16dp"
+                android:progressDrawable="@drawable/seekbar_progress"
+
                 />
 
             <LinearLayout
@@ -96,7 +97,7 @@
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#023859"
                     android:textStyle="bold"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="16dp"
                     />
 
                 <RelativeLayout
@@ -140,7 +141,8 @@
                 android:layout_height="wrap_content"
                 android:max="180"
                 android:progress="0"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="16dp"
+                android:progressDrawable="@drawable/seekbar_progress"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -156,7 +158,7 @@
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#023859"
                     android:textStyle="bold"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="16dp"
                     />
 
                 <RelativeLayout
@@ -199,7 +201,8 @@
                 android:layout_height="wrap_content"
                 android:max="180"
                 android:progress="0"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="16dp"
+                android:progressDrawable="@drawable/seekbar_progress"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -215,7 +218,7 @@
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#023859"
                     android:textStyle="bold"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="16dp"
                     />
 
                 <RelativeLayout
@@ -258,7 +261,8 @@
                 android:layout_height="wrap_content"
                 android:max="180"
                 android:progress="0"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="16dp"
+                android:progressDrawable="@drawable/seekbar_progress"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -274,7 +278,7 @@
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#023859"
                     android:textStyle="bold"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="16dp"
                 />
 
                 <RelativeLayout
@@ -292,7 +296,7 @@
                         android:textColor="#023859"
                         android:textStyle="bold"
                         android:layout_toLeftOf="@+id/seektext44"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginRight="16dp"
 
                         />
 
@@ -317,7 +321,8 @@
                 android:layout_height="wrap_content"
                 android:max="180"
                 android:progress="0"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="16dp"
+                android:progressDrawable="@drawable/seekbar_progress"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -333,7 +338,7 @@
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#023859"
                     android:textStyle="bold"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="16dp"
                     />
 
                 <RelativeLayout

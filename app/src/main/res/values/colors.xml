@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <color name="seekbar">#049dbf</color>
+    <color name="seekbarfree">#011826</color>
+
+</resources>
