@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Practica1</string>
     <string name="action_settings">Settings</string>
-    <string name="titulo">Practica1</string>
+    <string name="titulo">Practica 1</string>
     <string name="bconectar">Conectar</string>
 
 </resources>

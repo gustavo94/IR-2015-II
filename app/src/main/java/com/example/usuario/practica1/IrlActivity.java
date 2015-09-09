@@ -55,7 +55,7 @@ public class IrlActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (conexion.isChecked()) {
                     if(ip.getText().toString().equals("")) estado.setText("Ingrese una ip");
-                    else estado.setText("Conectando a" + ip.getText());
+                    else estado.setText("Conectando a: " + ip.getText());
                 } else {
                     estado.setText("En espera...");
                 }
@@ -156,19 +156,19 @@ public class IrlActivity extends AppCompatActivity {
     }
 
     public void mensajeGmu(){
-        gradosgmu.setText("Grados: "+gmu+"°");
+        gradosgmu.setText(gmu+"°");
     }
     public void mensajeGma(){
-        gradosgma.setText("Grados: "+gma+"°");
+        gradosgma.setText(gma+"°");
     }
     public void mensajeGbra(){
-        gradosgbr.setText("Grados: "+gbr+"°");
+        gradosgbr.setText(gbr+"°");
     }
     public void mensajeGco(){
-        gradosgco.setText("Grados: "+gco+"°");
+        gradosgco.setText(gco+"°");
     }
     public void mensajeGho(){
-        gradosgho.setText("Grados: "+gho+"°");
+        gradosgho.setText(gho+"°");
     }
 
 
