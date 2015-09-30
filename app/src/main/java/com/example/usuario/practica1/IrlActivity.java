@@ -1,5 +1,11 @@
 package com.example.usuario.practica1;
 
+import android.os.AsyncTask;
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.provider.ContactsContract;
+import android.text.InputType;
+import android.util.Log;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,8 +16,12 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
+import java.nio.charset.Charset;
 
-public class IrlActivity extends AppCompatActivity {
+public class IrlActivity extends Activity {
     public int gmu;
     public int gma;
     public int gbr;
@@ -22,6 +32,10 @@ public class IrlActivity extends AppCompatActivity {
     public TextView gradosgbr;
     public TextView gradosgco;
     public TextView gradosgho;
+    public TCPClient mTcpClient;
+    public String SERVERIP;
+    private String messaget;
+    public TextView estado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,7 +49,7 @@ public class IrlActivity extends AppCompatActivity {
         gradosgco=(TextView)findViewById(R.id.seektext44);
         gradosgho=(TextView)findViewById(R.id.seektext55);
 
-        final TextView estado=(TextView)findViewById(R.id.estado);
+        estado=(TextView)findViewById(R.id.estado);
         estado.setText("En espera...");
         final SeekBar sbmu = (SeekBar)findViewById(R.id.sbmu);
         final SeekBar sbma = (SeekBar)findViewById(R.id.sbma);
@@ -44,21 +58,34 @@ public class IrlActivity extends AppCompatActivity {
         SeekBar sbho = (SeekBar)findViewById(R.id.sbho);
         final ToggleButton conexion=(ToggleButton)findViewById(R.id.btnConectar);
         final EditText ip=(EditText)findViewById(R.id.txtDirec);
-        sbmu.setMax(180);
-        sbma.setMax(180);
-        sbbr.setMax(180);
-        sbco.setMax(180);
-        sbho.setMax(180);
+        sbmu.setMax(100);
+        sbma.setMax(100);
+        sbbr.setMax(100);
+        sbco.setMax(100);
+        sbho.setMax(100);
 
         conexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (conexion.isChecked()) {
-                    if(ip.getText().toString().equals("")) estado.setText("Ingrese una ip");
-                    else estado.setText("Conectando a: " + ip.getText());
-                } else {
-                    estado.setText("En espera...");
+                if(conexion.isChecked()) {
+                    new connectTask().execute("");
+                    SERVERIP = ip.getText().toString();
+                    estado.setText("Conectado");
                 }
+                else{
+                    try {
+                        estado.setText(mTcpClient.stopClient());
+                    }catch(Throwable e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+ //               if (conexion.isChecked()) {
+ //                   if(ip.getText().toString().equals("")) estado.setText("Ingrese una ip");
+ //                   else estado.setText("Conectando a: " + ip.getText());
+ //               } else {
+  //                  estado.setText("En espera...");
+  //              }
             }
         });
 
@@ -66,7 +93,7 @@ public class IrlActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 gmu = progress;
-                mensajeGmu();
+                mensaje();
             }
 
             @Override
@@ -84,7 +111,7 @@ public class IrlActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 gma = progress;
-                mensajeGma();
+                mensaje();
             }
 
             @Override
@@ -102,7 +129,7 @@ public class IrlActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 gbr = progress;
-                mensajeGbra();
+                mensaje();
             }
 
             @Override
@@ -120,7 +147,7 @@ public class IrlActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 gco = progress;
-                mensajeGco();
+                mensaje();
             }
 
             @Override
@@ -138,7 +165,7 @@ public class IrlActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 gho = progress;
-                mensajeGho();
+                mensaje();
             }
 
             @Override
@@ -153,6 +180,23 @@ public class IrlActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+
+    public class connectTask extends AsyncTask<String,String,TCPClient>{
+        @Override
+        protected TCPClient doInBackground(String... message) {
+            mTcpClient = new TCPClient(new TCPClient.OnMessageReceived(){
+                public void messageReceived(String message){
+                    publishProgress(message);
+                }
+            });
+            mTcpClient.IP(SERVERIP);
+            mTcpClient.run();
+            return null;
+
+        }
     }
 
     public void mensajeGmu(){
@@ -171,11 +215,43 @@ public class IrlActivity extends AppCompatActivity {
         gradosgho.setText(gho+"°");
     }
 
+    public void mensaje(){
+        gradosgmu.setText(gmu+"°");
+        gradosgma.setText(gma+"°");
+        gradosgbr.setText(gbr+"°");
+        gradosgco.setText(gco+"°");
+        gradosgho.setText(gho+"°");
+
+        byte[] b = {(byte) 126, (byte) gmu, (byte) gma,(byte) gbr, (byte) gco, (byte) gho};
+        String s="";
+        try{
+            s=new String(b,"UTF-8");
+        } catch(UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+        System.out.println(s);
+        try {
+            System.out.write(b);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        if(mTcpClient != null){
+            mTcpClient.sendMessage(s);
+            estado.setText(mTcpClient.conection());
+
+//        byte[] b = {(byte)}
+//        if(mTcpClient!= null){nnn
+//           mTcpClient.sendMessage(gradosgmu.getText().toString()+"°"+gradosgma.getText().toString()+"°"+gradosgbr.getText().toString()+"°"+gradosgco.getText().toString()+"°"+gradosgho.getText().toString()+"°");
+
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_irl, menu);
+        Log.d("confirmacion","confirmacion");
         return true;
     }
 
